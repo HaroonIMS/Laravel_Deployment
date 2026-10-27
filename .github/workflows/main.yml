@@ -25,7 +25,7 @@ jobs:
           command_timeout: 10m
           script: |
             set -e
-            cd /var/www/sabzicart
+            cd /var/www/sabzicart-admin/sabzicart-admin
             git pull --ff-only origin main
             php artisan optimize:clear
             php artisan optimize
