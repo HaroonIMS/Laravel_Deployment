@@ -26,6 +26,5 @@ jobs:
           script: |
             set -e
             cd /var/www/sabzicart-admin/sabzicart-admin
-            git pull --ff-only origin main
-            php artisan optimize:clear
-            php artisan optimize
+            git pull origin main
+            
