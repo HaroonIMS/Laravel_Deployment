@@ -18,6 +18,7 @@ class GuestbookController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:100',
+            'author' => 'nullable|string|max:100',
             'body' => 'required|string|max:1000',
         ]);
 
