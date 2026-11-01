@@ -20,7 +20,7 @@
 
     @foreach ($messages as $message)
         <div>
-            <strong>{{ $message->name }}</strong>
+            <strong>{{ $message->name }}</strong> <em>{{ $message->author }}</em>
             <p>{{ $message->body }}</p>
         </div>
     @endforeach
