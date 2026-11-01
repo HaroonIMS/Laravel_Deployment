@@ -121,3 +121,11 @@ The domain is a free DuckDNS name. The name `guest-book` was already taken, so I
 6.Laptop DNS translates the domain name into the server's IP address, and the browser connects to it on port 80. Nginx reads the Host header in the request and uses the server block whose server_name matches it.", 
 
 
+
+## 10. Screenshots
+
+- `Screenshot From 2026-11-01 19-38-22.png`
+- `Screenshot From 2026-11-01 19-38-43.png`
+- `Screenshot From 2026-11-01 19-38-58.png`
+- `Screenshot From 2026-11-01 19-39-17.png` 
+- `Screenshot From 2026-11-01 19-40-13.png`
