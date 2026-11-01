@@ -11,7 +11,7 @@ class HealthController extends Controller
         try {
             DB::select('SELECT 1');
 
-            return response('OK', 200)->header('Content-Type', 'text/plain');
+            return response("OK", 200->header('Content-Type', 'text/plain');
         } catch (\Throwable $e) {
             return response('DATABASE UNAVAILABLE', 503)->header('Content-Type', 'text/plain');
         }
