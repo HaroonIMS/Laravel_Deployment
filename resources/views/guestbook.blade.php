@@ -14,6 +14,7 @@
     <form method="POST" action="/">
         @csrf
         <input type="text" name="name" placeholder="Your name" required>
+        <input type="text" name="author" placeholder="Author (optional)">
         <textarea name="body" placeholder="Your message" required></textarea>
         <button type="submit">Sign</button>
     </form>
