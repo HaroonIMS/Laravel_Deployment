@@ -5,7 +5,7 @@
     <title>Guestbook</title>
 </head>
 <body>
-    <h1>Guestbook</h1>
+    <h1>Guestbook (deployed by Git)</h1>
 
     @if (session('status'))
         <p>{{ session('status') }}</p>
