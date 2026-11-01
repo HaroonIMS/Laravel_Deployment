@@ -1,0 +1,49 @@
+name: Deploy to app-vm
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      APP_URL: http://guests-books.duckdns.org
+    steps:
+      - name: Set up SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Run deploy script on app-vm
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: ssh -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" "bash /var/www/guestbook/scripts/deploy.sh"
+
+      - name: Health check
+        run: |
+          for i in 1 2 3 4 5 6; do
+            if curl -fsS "$APP_URL/health" | grep -qx "OK"; then
+              echo "Health check passed"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying in 5s"
+            sleep 5
+          done
+          echo "Health check FAILED"
+          exit 1
